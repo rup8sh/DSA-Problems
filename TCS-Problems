@@ -1,0 +1,44 @@
+Q.Given a string S(input consisting) of ‘*’ and ‘#’. The length of the string is variable. The task is to find the minimum number of ‘*’ or ‘#’ to make it a valid string. The string is considered valid if the number of ‘*’ and ‘#’ are equal. The ‘*’ and ‘#’ can be at any position in the string.
+Note : The output will be a positive or negative integer based on number of ‘*’ and ‘#’ in the input string.
+
+(*>#): positive integer
+(#>*): negative integer
+(#=*): 0
+Example 1:
+Input 1:
+
+###***   -> Value of S
+Output :
+
+0   → number of * and # are equal
+
+Solution:
+
+import java.util.*;
+import java.io.*;
+
+public class Sept_D_1_Slt_1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String s = sc.nextLine();
+		int counta=0;
+		int countb=0;
+		for(int i=0; i<s.length(); i++)
+		{
+			if(s.charAt(i) == '*')
+			{
+				counta++;
+			}
+			else if(s.charAt(i) == '#')
+			{
+				countb++;
+			}
+		}
+		System.out.println(counta-countb);
+	}
+
+}
