@@ -38,28 +38,18 @@ Constraints:
 1 <= nums[i] <= 100
 1 <= k <= 99
 Solution:
+
 class Solution {
     public int countKDifference(int[] arr, int k) {
-          Map<Integer, Integer> frequencyMap = new HashMap<>();
+   Map<Integer, Integer> frequencyMap = new HashMap<>();
         int count = 0;
         for (int num : arr) {
             frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
         }
 
         for (int num : arr) {
-            int complement1 = num - k;
-            int complement2 = num + k;
-
-            if (frequencyMap.containsKey(complement1)) {
-                count += frequencyMap.get(complement1);
-            }
-
-            if (frequencyMap.containsKey(complement2)) {
-                count += frequencyMap.get(complement2);
-            }
-
-        
-            frequencyMap.put(num, frequencyMap.get(num) - 1);
+        count+= frequencyMap.getOrDefault(num - k, 0) + frequencyMap.getOrDefault(num + k,0);
+        frequencyMap.put(num, frequencyMap.get(num) - 1);
         }
 
         return count;
