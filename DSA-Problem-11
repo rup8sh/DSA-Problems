@@ -1,0 +1,58 @@
+Q-11.https://www.geeksforgeeks.org/count-number-subarrays-given-xor/
+Given an array of integers arr[] and a number m, count the number of subarrays having XOR of their elements as m.
+Examples: 
+
+Input : arr[] = {4, 2, 2, 6, 4}, m = 6
+Output : 4
+Explanation : The subarrays having XOR of 
+              their elements as 6 are {4, 2}, 
+              {4, 2, 2, 6, 4}, {2, 2, 6},
+               and {6}
+
+Input : arr[] = {5, 6, 7, 8, 9}, m = 5
+Output : 2
+Explanation : The subarrays having XOR of
+              their elements as 5 are {5}
+              and {5, 6, 7, 8, 9}
+
+Solution:
+
+import java.util.HashMap;
+
+public class SubarrayXOR {
+    public static int countSubarrays(int[] arr, int targetXOR) {
+        int count = 0;
+        int xor = 0;
+
+        // Store the count of subarrays with XOR equals to targetXOR
+        HashMap<Integer, Integer> xorCount = new HashMap<>();
+
+        // Iterate through the array
+        for (int i = 0; i < arr.length; i++) {
+            // Calculate the XOR of current element with the previous XOR
+            xor = xor ^ arr[i];
+
+            // If XOR equals to targetXOR, increment the count
+            if (xor == targetXOR)
+                count++;
+
+            // If there is a subarray ending at this index with XOR equals to targetXOR,
+            // increment the count by the value stored in xorCount map
+            if (xorCount.containsKey(xor ^ targetXOR))
+                count += xorCount.get(xor ^ targetXOR);
+
+            // Store the count of subarrays with XOR equals to current XOR
+            xorCount.put( xor, xorCount.getOrDefault(xor,0)+1);
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 2, 6, 4};
+        int targetXOR = 6;
+
+        int result = countSubarrays(arr, targetXOR);
+        System.out.println("Number of subarrays with XOR " + targetXOR + ": " + result);
+    }
+}
