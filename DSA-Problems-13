@@ -1,4 +1,6 @@
-Q-13. Question1: Given an array A consisting of N integers, returns the maximum sum of two numbers whose digits add up to an equal sum.
+Q-13. 
+           [MICROSOFT-OA]
+Given an array A consisting of N integers, returns the maximum sum of two numbers whose digits add up to an equal sum.
 if there are not two numbers whose digits have an equal sum, the function should return -1.
 Constraints: N is integer within the range [1, 200000]
 each element of array A is an integer within the range [1, 1000000000]
