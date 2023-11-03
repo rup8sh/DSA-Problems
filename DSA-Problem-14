@@ -1,0 +1,102 @@
+Q. https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/description/
+You are given an array of strings words. Each element of words consists of two lowercase English letters.
+
+Create the longest possible palindrome by selecting some elements from words and concatenating them in any order. Each element can be selected at most once.
+
+Return the length of the longest palindrome that you can create. If it is impossible to create any palindrome, return 0.
+
+A palindrome is a string that reads the same forward and backward.
+
+ 
+
+Example 1:
+
+Input: words = ["lc","cl","gg"]
+Output: 6
+Explanation: One longest palindrome is "lc" + "gg" + "cl" = "lcggcl", of length 6.
+Note that "clgglc" is another longest palindrome that can be created.
+Example 2:
+
+Input: words = ["ab","ty","yt","lc","cl","ab"]
+Output: 8
+Explanation: One longest palindrome is "ty" + "lc" + "cl" + "yt" = "tylcclyt", of length 8.
+Note that "lcyttycl" is another longest palindrome that can be created.
+Example 3:
+
+Input: words = ["cc","ll","xx"]
+Output: 2
+Explanation: One longest palindrome is "cc", of length 2.
+Note that "ll" is another longest palindrome that can be created, and so is "xx".
+
+Solution:
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int longestPalindrome(String[] words) {
+        int len = 0;
+        int flag = 0;
+        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> palindromeWord = new HashMap<>();
+
+        for (String word : words) {
+            if (word.charAt(0) == word.charAt(1)) {
+                palindromeWord.put(word, palindromeWord.getOrDefault(word, 0) + 1);
+            }
+            String revWord = new StringBuilder(word).reverse().toString();
+            if (map.getOrDefault(revWord, 0) >= 1) {
+                len += 4;
+                map.put(revWord, map.get(revWord) - 1);
+            } else {
+                map.put(word, map.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        for (Map.Entry<String, Integer> entry : palindromeWord.entrySet()) {
+            if (entry.getValue() % 2 == 1) {
+                len += 2;
+                break;
+            }
+        }
+
+        return len;
+    }
+}
+
+
+
+DRY-RUN:
+Let's consider the words array ["ab","ty","yt","lc","cl","ab"] and track the execution step by step:
+
+For the first word "ab":
+
+The map is empty, so it goes to the else block and adds "ab" as a key to the map with a value of 1.
+For the second word "ty":
+
+The reverse of "ty" is "yt".
+The map does not have a key "yt", so it goes to the else block and adds "ty" as a key to the map with a value of 1.
+For the third word "yt":
+
+The reverse of "yt" is "ty".
+The map already has a key "ty" with a value of 1.
+It goes to the if block because map.getOrDefault(revWord, 0) >= 1 evaluates to true.
+The value of len is incremented by 4, making it 4.
+The value associated with the key "ty" in the map is decremented by 1, making it 0.
+For the fourth word "lc":
+
+The reverse of "lc" is "cl".
+The map does not have a key "cl", so it goes to the else block and adds "lc" as a key to the map with a value of 1.
+For the fifth word "cl":
+
+The reverse of "cl" is "lc".
+The map already has a key "lc" with a value of 1.
+It goes to the if block because map.getOrDefault(revWord, 0) >= 1 evaluates to true.
+The value of len is incremented by 4, making it 8.
+The value associated with the key "lc" in the map is decremented by 1, making it 0.
+For the sixth word "ab":
+
+The reverse of "ab" is "ba".
+The map does not have a key "ba", so it goes to the else block and adds "ab" as a key to the map with a value of 1 and count of ab goes up to 2. 
+Next since no word is present that have odd count then , since 2 % 2 =0, so there won't be any effects of ab. and only 
+4 of yt and 4 of lc would be counted.
