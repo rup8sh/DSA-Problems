@@ -80,7 +80,7 @@ public class microsoft_OA {
 
 
 DRY RUN:
-Certainly! Let's dry run the code for the example `int[] A = {51, 71, 17, 42};`:
+Let's dry run the code for the example `int[] A = {51, 71, 17, 42};`:
 
 1. We initialize an empty HashMap called `digitSumToMaxSum` to store the maximum sum for each digit sum.
 
