@@ -1,0 +1,71 @@
+Q. https://www.desiqna.in/13820/google-oa-sde2-jan-2023
+                                                                         [GOOGLE-OA]
+
+You are given an array A of N integers. You have to find the number of special pairs in
+array A. A pair of two indexes / and / are called special if the following 2 conditions are
+satisfied:
+• 1< J
+Find out the number of special pairs present in array A.
+Note: 1 based indexing is used.
+Function description
+Complete the function solve provided in the editor. This function takes the following
+2 parameters and returns the required answer:
+• N: Represents the size of array A
+• A: Represents the elements of array A
+Input format for custom testing
+Note: Use this input format if you are testing against custom input or writing code in a
+language where we don't provide boilerplate code.
+• The first line contains T, which represents the number of test cases.
+• For each test case:
+• The first line consists of a single Integer N denoting the size of the array A.
+• The second line consists of N space-separated Integers denoting the elements of
+the array A.
+Output format
+For each test case in a new line. print a single integer denoting the answer to the test case.
+Constraints
+1<T < 10
+1 ≤ N ≤ 105
+1≤ A ≤N
+Sample input
+1
+4
+4 2 1 2
+Sample output
+2 1 2
+
+
+Solution:
+import java.util.*;
+import java.io.*;
+public class google_oa {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] a = new int[n+1];
+		
+		for(int i= 1 ; i<=n  ;i++ )
+		{
+			a[i] = sc.nextInt();
+		}
+		Map<Integer, Integer> hm = new HashMap<>();
+		int count =0; 
+		int i =1;
+		
+		while(i<=n)
+		{
+			int RHS = a[a[a[i]]];
+			int g = hm.getOrDefault(RHS,0);
+			count +=g;
+			
+			int LHS = a[a[a[i]]];
+			hm.put(LHS, hm.getOrDefault(LHS,0)+1);
+			i++;
+		}
+		System.out.println(count);
+	}
+
+}
+
+
