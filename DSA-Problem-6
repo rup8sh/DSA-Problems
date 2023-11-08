@@ -20,7 +20,7 @@ Constraints:
 -109 <= nums[i] <= 109
 
 SOlution:
-lass Solution {
+class Solution {
     public int longestConsecutive(int[] nums) {
         if(nums.length == 0)
         {
